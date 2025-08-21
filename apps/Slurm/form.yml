@@ -1,0 +1,109 @@
+---
+form:
+  nodes:
+    widget: number
+    label: Number of Nodes
+    value: 1         # Default value
+    min: 1           # Minimum number of nodes
+    help: Specify the number of nodes required for your job.
+
+  tasks_per_node:
+    widget: number
+    label: Number of Tasks per Node
+    value: 1
+    min: 1
+    help: Specify the number of tasks per node.
+
+  cpus_per_task:
+    widget: number
+    label: CPUs per Task
+    value: 1
+    min: 1
+    help: Specify the number of CPUs per task.
+
+  time:
+    widget:   number
+    label:    [ Maximum run time hours (0 - 24), Maximum run minutes (0 - 59) ]
+    size:     2
+    value:    [  1,  0 ]
+    min:      [  0,  0 ]
+    max:      [ 24, 59 ]
+    step:     [  1,  1 ]
+    help: Specify the maximum run time for your job.
+
+  memory:
+    widget: number
+    label: Memory (GB)
+    value: 1
+    min: 1
+    help: Specify the memory requirement for your job.
+  
+  gpu_type:
+    widget: select
+    label: GPU Type
+    options:
+      - ["No GPU", ""]
+      - ["V100", "v100"]
+      - ["A100", "a100"]
+      - ["RTX8000", "rtx8000"]
+      - ["MI50", "mi50"]
+      - ["MI100", "mi100"]
+    value: ""  # Default to "No GPU"
+    help: Select the type of GPU required for your job.
+
+  gpu_count:
+    widget: number
+    label: Number of GPUs
+    value: 1
+    min: 1
+    help: Specify the number of GPUs required.
+
+  show_advanced_option:
+    widget: checkbox
+    label:
+    options:
+      - ["Show advanced option", "", show-account, show-email, show-mail_option, show-array, show-log ]
+
+  account:
+    widget: text
+    label: SLURM Account ID
+    help: Specify your SLURM account ID for job submission (Tandon).
+    condition: show-account
+
+  mail_option:
+    label: Mail option
+    widget: checkbox
+    direction: horizontal
+    separator: ","
+    indent: 1
+    options:
+      - [ "Beginning of job execution", 'BEGIN',   enable-email ]
+      - [ "End of job execution",       'END',     enable-email ]
+      - [ "Fail of job",                'FAIL',    enable-email ]
+      - [ "When the job is requeued",   'REQUEUE', enable-email ]
+      - [ "All",                        'ALL',     enable-email ]
+      
+  email:
+    widget: email
+    label:  Email
+    indent: 2
+    
+  array:
+    widget: number
+    label: [ Array Job (start index), Array Job (last index) ]
+    size: 2
+    min:  [0, 0]
+    help: Each job executed from an array job is assigned a task ID, which can be referenced in the shell script via the environment variable SLURM_ARRAY_TASK_ID.
+
+script: |
+  #!/bin/bash
+  #SBATCH --nodes=#{nodes}
+  #SBATCH --ntasks-per-node=#{tasks_per_node}
+  #SBATCH --cpus-per-task=#{cpus_per_task}
+  #SBATCH --time=#{time_1}:#{time_2}:00
+  #SBATCH --mem=#{memory}GB
+  #SBATCH --gres=gpu:#{gpu_type}:#{gpu_count}
+  #SBATCH --account=#{account}
+  #SBATCH --mail-user=#{email}
+  #SBATCH --mail-type=#{mail_option}
+  #SBATCH --array=#{array_1}-#{array_2}

@@ -1,0 +1,5 @@
+---
+name: Job Script (Slurm)
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Slurm_logo.svg/262px-Slurm_logo.svg.png
+description: |
+  This application generates an arbitrary job script in Slurm.

@@ -1,0 +1,6 @@
+---
+name: AlphaFold 3
+icon: https://avatars.githubusercontent.com/u/8596759?s=48&v=4
+description: |
+  Please note that standard AlphaFold 3 model parameters are only available under terms of use provided at
+  <a href='https://github.com/google-deepmind/alphafold3/blob/main/WEIGHTS_TERMS_OF_USE.md'>WEIGHTS_TERMS_OF_USE</a>

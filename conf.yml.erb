@@ -1,0 +1,34 @@
+---
+# Required Settings
+scheduler: slurm
+apps_dir: "./apps"
+
+# Optional Settings
+## General
+#login_node: "example.com"
+#data_dir:  <%= ENV['HOME'] %>/composer
+bin: "/opt/slurm/bin/"
+#bin_overrides:
+sbatch:   "/opt/slurm/bin/sbatch"
+scontrol: "/opt/slurm/bin/scontrol"
+scancel:  "/opt/slurm/bin/scancel"
+sacct:    "/opt/slurm/bin/sacct"
+#  pjsub:    "/usr/local/bin/pjsub"
+#  pjstat:   "/usr/local/bin/pjstat"
+#  pjdel:    "/usr/local/bin/pjdel"
+#  qsub:     "/opt/pbs/bin/qsub"
+#  qstat:    "/usr/local/bin/qstat"
+#  qdel:     "/usr/local/bin/qdel"
+#  qacct:    "/usr/local/bin/qacct"
+#ssh_wrapper: "ssh hoge@example.com"
+#sge_root: "/apps/t4/rhel9/uge/latest"
+
+## Layout
+footer:            "NYU HPC"
+thumbnail_width:   "100"
+navbar_color:      "#57068c"
+dropdown_color:    "#330662"
+footer_color:      "#57068c"
+category_color:    "#8900e1"
+description_color: "#8900e1"
+form_color:        "#eee6f3"
